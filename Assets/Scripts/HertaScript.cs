@@ -50,6 +50,15 @@ public class HertaScript : MonoBehaviour
             anim.ResetTrigger("StrafeRight");
             anim.ResetTrigger("Jumping");
         }
+        else if (Input.GetKey(KeyCode.Space))
+        {
+            anim.SetTrigger("Jumping");
+            anim.ResetTrigger("Idling");
+            anim.ResetTrigger("Running");
+            anim.ResetTrigger("StrafeLeft");
+            anim.ResetTrigger("StrafeRight");
+            anim.ResetTrigger("Backwards");
+        }
         else
         {
             anim.SetTrigger("Idling");
