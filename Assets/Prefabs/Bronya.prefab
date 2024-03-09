@@ -3451,6 +3451,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   anim: {fileID: 8339052982914085897}
+  enemyLogicEngine: {fileID: 0}
+  enemies: []
+  baseDamage: 20
+  baseHealth: 150
+  buffedDamage: 0
+  buffedHealth: 0
 --- !u!1 &3371628306606717364
 GameObject:
   m_ObjectHideFlags: 0
@@ -7205,6 +7211,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8801127215895624290}
   - component: {fileID: 2671078027526197754}
+  - component: {fileID: 2737827219242946346}
+  - component: {fileID: 5715887816267413957}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -7419,6 +7427,55 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.22248939, y: -0.17827651, z: 0.0021234453}
     m_Extent: {x: 0.7861948, y: 0.3297898, z: 0.49613032}
   m_DirtyAABB: 0
+--- !u!54 &2737827219242946346
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316617681239181440}
+  serializedVersion: 4
+  m_Mass: 47
+  m_Drag: 0
+  m_AngularDrag: 0.005
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &5715887816267413957
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316617681239181440}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2959467708922500008, guid: 56e4bcfdb46bad144b124b768ecbbb8c, type: 3}
 --- !u!1 &7320976026984973509
 GameObject:
   m_ObjectHideFlags: 0

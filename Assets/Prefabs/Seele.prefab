@@ -7233,6 +7233,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   anim: {fileID: 0}
+  enemyLogicEngine: {fileID: 0}
+  buffedDamage: 0
+  buffedHealth: 0
+  currentMaxHealth: 0
+  currentMaxDamage: 0
 --- !u!1 &4891547209362282654
 GameObject:
   m_ObjectHideFlags: 0
@@ -11475,7 +11480,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 45
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.005
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
