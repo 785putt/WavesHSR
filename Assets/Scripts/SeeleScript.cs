@@ -66,7 +66,16 @@ public class SeeleScript : MonoBehaviour
             isDead = true;
             anim.SetBool("isDead", true);
             Debug.Log("Seele is dead");
+            StartCoroutine(SetInactive());
         }
+    }
+    void OnEnable()
+    {
+        currentHealth = currentMaxHealth;
+        isDead = false;
+        anim.SetBool("isDead", false);
+        transform.parent.position = new Vector3(Random.Range(-10, 10), 0.125f, Random.Range(-10, 10));
+        transform.parent.LookAt(player.transform);
     }
     private IEnumerator CheckBuffedState()
     {
@@ -107,6 +116,12 @@ public class SeeleScript : MonoBehaviour
         {
             yield return null;
         }
+    }
+    // Set the game object to inactive after the death animation
+    private IEnumerator SetInactive()
+    {
+        yield return new WaitForSeconds(5);
+        transform.parent.gameObject.SetActive(false);
     }
     // Fix the rotation from the lookAt method since sometimes it goes upside down and goes through the floor
     private void LateUpdate()

@@ -87,7 +87,16 @@ public class BronyaScript : MonoBehaviour
             isDead = true;
             anim.SetBool("isDead", true);
             Debug.Log("Bronya is dead");
+            StartCoroutine(SetInactive());
         }
+    }
+    void OnEnable()
+    {
+        currentHealth = currentMaxHealth;
+        isDead = false;
+        anim.SetBool("isDead", false);
+        transform.parent.position = new Vector3(Random.Range(-10, 10), 0.125f, Random.Range(-10, 10));
+        transform.parent.LookAt(player.transform);
     }
     private IEnumerator CheckBuffedState()
     {
@@ -129,7 +138,12 @@ public class BronyaScript : MonoBehaviour
             yield return null;
         }
     }
-
+    // Set the enemy inactive after the death animation
+    private IEnumerator SetInactive()
+    {
+        yield return new WaitForSeconds(3);
+        transform.parent.gameObject.SetActive(false);
+    }
     // Fix the rotation from the lookAt method since sometimes it goes upside down and goes through the floor
     private void LateUpdate()
     {

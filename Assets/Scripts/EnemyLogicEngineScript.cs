@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
     private int enemyPerLevel = 10;
     private int eliteEnemyPerLevel = 1;
     private int currentLevel;
+    private int currentActiveEnemies;
     public List<GameObject> enemies;
     public GameObject seele;
     public GameObject bronya;
@@ -31,17 +33,26 @@ public class EnemyLogicEngineScript : MonoBehaviour
         // Debug.Log("Attack state: " + attackState);
         // Debug.Log("Health state: " + healthState);
     }
+    // Coroutine to activate the old enemies (object pooling) before adding new enemies for the next level
+    private IEnumerator ActivateOldEnemies()
+    {
+        yield return new WaitForSeconds(1);
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(true);
+        }
+    }
     // Coroutine to spawn enemies
     private IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < enemyPerLevel * currentLevel; i++)
+        for (int i = 0; i < enemyPerLevel; i++)
         {
-            // Spawn normal enemie
+            // Spawn normal enemies
             enemies.Add(Instantiate(seele, new Vector3(Random.Range(-10, 10), 0.125f, Random.Range(-10, 10)), Quaternion.identity));
             // Instantiate(seele, new Vector3(Random.Range(-10, 10), 0.25f, Random.Range(-10, 10)), Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
-        for (int i = 0; i < eliteEnemyPerLevel * currentLevel; i++)
+        for (int i = 0; i < eliteEnemyPerLevel; i++)
         {
             // Spawn elite enemies
             enemies.Add(Instantiate(bronya, new Vector3(Random.Range(-10, 10), 0.125f, Random.Range(-10, 10)), Quaternion.identity));
@@ -54,10 +65,21 @@ public class EnemyLogicEngineScript : MonoBehaviour
     private IEnumerator CheckEnemiesStatus()
     {
         yield return new WaitForSeconds(1);
-        if (enemies.Count == 0)
+        foreach (GameObject enemy in enemies)
         {
+            // Check the enemies active state
+            if (enemy.activeSelf == true)
+            {
+                currentActiveEnemies++;
+            }
+        }
+        if (currentActiveEnemies == 0)
+        {
+            // Debug.Log("All enemies are defeated");
+            StartCoroutine(ActivateOldEnemies());
             StartCoroutine(SpawnEnemies());
         }
+        currentActiveEnemies = 0;
     }
 
     // Function to kill all the enemies for testing purposes
