@@ -76,8 +76,29 @@ public class HertaScript : MonoBehaviour
     // LateUpdate is called after Update
     private void LateUpdate()
     {
-        transform.position = new Vector3(xrCameraOffset.transform.position.x, transform.position.y, xrCameraOffset.transform.position.z + 0.3f);
-        // transform.rotation = new Quaternion(0, xrCameraOffset.transform.rotation.y, 0, xrCameraOffset.transform.rotation.w);
+        transform.position = new Vector3(xrCameraOffset.transform.position.x, transform.position.y, xrCameraOffset.transform.position.z + 0.0f);
+        transform.rotation = new Quaternion(0, -xrCameraOffset.transform.rotation.y, 0, -xrCameraOffset.transform.rotation.w);
     }
+    // private void LateUpdate()
+    // {
+    //     // Calculate the desired position based on the camera's position and a fixed offset distance
+    //     Vector3 desiredPosition = xrCameraOffset.transform.position - (xrCameraOffset.transform.forward * 1.25f);
+
+    //     // Calculate the direction from the model to the desired position
+    //     Vector3 direction = desiredPosition - transform.position;
+
+    //     // Normalize the direction vector to ensure consistent distance
+    //     direction.Normalize();
+
+    //     // Move the model to the desired position with a fixed offset distance
+    //     Vector3 newDesiredPosition = desiredPosition - direction * 1.25f;
+    //     transform.position = new Vector3(newDesiredPosition.x, transform.position.y, newDesiredPosition.z);
+        
+    //     // // Get the y rotation of the camera
+    //     float yRotation = xrCameraOffset.transform.rotation.eulerAngles.y;
+    //     // Apply the y rotation to the character model
+    //     transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+    // }
+
 
 }

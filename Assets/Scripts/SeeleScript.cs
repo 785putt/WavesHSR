@@ -43,7 +43,7 @@ public class SeeleScript : MonoBehaviour
             distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
             // Coroutine to check the buffed state
             StartCoroutine(CheckBuffedState());
-            if (distanceToPlayer < 1.5f)
+            if (distanceToPlayer < 0.25f)
             {
                 anim.SetBool("isAttacking", true);
                 // To make sure that the coroutine is not running multiple times
@@ -104,7 +104,7 @@ public class SeeleScript : MonoBehaviour
     private IEnumerator CheckIfInRange()
     {
         distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
-        if (distanceToPlayer < 1.5f)
+        if (distanceToPlayer < 0.25f)
         {
             isAttacking = true;
             yield return new WaitForSeconds(attackSpeed);

@@ -38,12 +38,14 @@ public class BronyaScript : MonoBehaviour
     {
         if (currentHealth > 0)
         {
+            // Look at the player
+            transform.parent.LookAt(player.transform);
             distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
             // Coroutine to check the buffed state
             StartCoroutine(CheckBuffedState());
             // Find all enemies
             enemies = GameObject.FindGameObjectsWithTag("Enemies");
-            if (distanceToPlayer < 1.5)
+            if (distanceToPlayer < 1)
             {
                 anim.SetBool("isAttacking", true);
                 anim.SetBool("isBuffing", false);
@@ -125,7 +127,7 @@ public class BronyaScript : MonoBehaviour
     private IEnumerator CheckIfInRange()
     {
         distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
-        if (distanceToPlayer < 1.5f)
+        if (distanceToPlayer < 0.25f)
         {
             isAttacking = true;
             yield return new WaitForSeconds(attackSpeed);
