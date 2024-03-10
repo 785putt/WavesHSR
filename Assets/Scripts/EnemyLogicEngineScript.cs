@@ -18,7 +18,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
         attackState = EnemyAttackState.attackNormal;
         healthState = EnemyHealthState.healthNormal;
         currentLevel = 1;
-        SpawnEnemies();
+        StartCoroutine(SpawnEnemies());
     }
 
     // Update is called once per frame
@@ -28,17 +28,19 @@ public class EnemyLogicEngineScript : MonoBehaviour
         // Debug.Log("Health state: " + healthState);
     }
 
-    private void SpawnEnemies()
+    private IEnumerator SpawnEnemies()
     {
         for (int i = 0; i < enemyPerLevel * currentLevel; i++)
         {
             // Spawn normal enemies
             Instantiate(seele, new Vector3(Random.Range(-10, 10), 0.25f, Random.Range(-10, 10)), Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
         }
         for (int i = 0; i < eliteEnemyPerLevel * currentLevel; i++)
         {
             // Spawn elite enemies
             Instantiate(bronya, new Vector3(Random.Range(-10, 10), 0.25f, Random.Range(-10, 10)), Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
