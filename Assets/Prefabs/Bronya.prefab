@@ -3387,8 +3387,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1315629926445304783}
-  - component: {fileID: 8339052982914085897}
-  - component: {fileID: 8931435059982242655}
+  - component: {fileID: 1465630303137026643}
+  - component: {fileID: 6127087984925850075}
   m_Layer: 0
   m_Name: Bronya
   m_TagString: Untagged
@@ -3416,7 +3416,7 @@ Transform:
   - {fileID: 8105213483197919602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8339052982914085897
+--- !u!95 &1465630303137026643
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -3425,7 +3425,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3339722719566286768}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ad42185edd8eb5244b0463562fb4984d, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 56e4bcfdb46bad144b124b768ecbbb8c, type: 3}
   m_Controller: {fileID: 9100000, guid: e96b6d2fde874e0418422c718dab1bc5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -3437,7 +3437,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8931435059982242655
+--- !u!114 &6127087984925850075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3446,17 +3446,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3339722719566286768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca3643994439ad4d94c976127ab8546, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a64ede3f46d3451595aa3790625db33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToPlayer: 0
   player: {fileID: 0}
-  anim: {fileID: 8339052982914085897}
-  enemyLogicEngine: {fileID: 0}
-  enemies: []
-  baseDamage: 20
-  baseHealth: 150
-  buffedDamage: 0
-  buffedHealth: 0
 --- !u!1 &3371628306606717364
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,8 +7205,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8801127215895624290}
   - component: {fileID: 2671078027526197754}
-  - component: {fileID: 2737827219242946346}
-  - component: {fileID: 5715887816267413957}
+  - component: {fileID: 8029042941935360879}
+  - component: {fileID: 1956170420421099655}
+  - component: {fileID: 1189448782002654106}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -7427,7 +7422,30 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.22248939, y: -0.17827651, z: 0.0021234453}
     m_Extent: {x: 0.7861948, y: 0.3297898, z: 0.49613032}
   m_DirtyAABB: 0
---- !u!54 &2737827219242946346
+--- !u!136 &8029042941935360879
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316617681239181440}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.55
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!54 &1956170420421099655
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7437,7 +7455,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 47
   m_Drag: 0
-  m_AngularDrag: 0.005
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -7454,28 +7472,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &5715887816267413957
-MeshCollider:
+--- !u!114 &1189448782002654106
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7316617681239181440}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2959467708922500008, guid: 56e4bcfdb46bad144b124b768ecbbb8c, type: 3}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca3643994439ad4d94c976127ab8546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  anim: {fileID: 0}
+  enemyLogicEngine: {fileID: 0}
+  enemies: []
+  baseDamage: 20
+  baseHealth: 150
+  buffedDamage: 0
+  buffedHealth: 0
 --- !u!1 &7320976026984973509
 GameObject:
   m_ObjectHideFlags: 0
