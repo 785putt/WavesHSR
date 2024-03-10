@@ -5,17 +5,24 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int maxHealth = 100;
-    private int currentHealth;
-    private int currentAttack;
+    private float maxHealth = 1000;
+    public float currentHealth;
+    private float currentAttack = 10;
     void Start()
     {
-        
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player is dead");
+        }
+        else
+        {
+            Debug.Log("Current health: " + currentHealth);
+        }
     }
 }

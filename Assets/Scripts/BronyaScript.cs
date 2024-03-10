@@ -5,6 +5,7 @@ using UnityEngine;
 public class BronyaScript : MonoBehaviour
 {
     public GameObject player;
+    private float distanceToPlayer;
     public Animator anim;
     public GameObject enemyLogicEngine;
     public GameObject[] enemies;
@@ -12,15 +13,18 @@ public class BronyaScript : MonoBehaviour
     [SerializeField] private int baseHealth = 150;
     [SerializeField] private int buffedDamage;
     [SerializeField] private int buffedHealth;
+    private float attackSpeed = 3.4f;
+    private bool isAttacking = false;
     private int currentMaxHealth;
     private int currentMaxDamage;
     private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInParent<Animator>();
+
         enemyLogicEngine = GameObject.Find("EnemyLogicEngine");
-        player = GameObject.Find("PlayerCapsule");
+        player = GameObject.Find("Professor Herta");
         currentMaxHealth = baseHealth;
         currentMaxDamage = baseDamage;
         buffedDamage = baseDamage * 2;
@@ -30,23 +34,27 @@ public class BronyaScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
         // Coroutine to check the buffed state
         StartCoroutine(CheckBuffedState());
         // Find all enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemies");
-        // Look at the player
-        transform.LookAt(player.transform);
-        if (Vector3.Distance(transform.position, player.transform.position) < 2)
+        if (distanceToPlayer < 1.5)
         {
             anim.SetBool("isAttacking", true);
             anim.SetBool("isBuffing", false);
+            // To make sure that the coroutine is not running multiple times
+            if (isAttacking == false)
+            {
+                StartCoroutine(CheckIfInRange());
+            }
         }
         // If the enemies are near, buff the enemies
         else if (enemies.Length > 0)
         {
             foreach (GameObject enemy in enemies)
             {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 15)
+                if (distanceToPlayer < 15)
                 {
                     // Set the attack state to buffed
                     enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().attackState = EnemyAttackState.attackBuffed;
@@ -64,6 +72,8 @@ public class BronyaScript : MonoBehaviour
         }
         else
         {
+            // Look at the player
+            transform.parent.LookAt(player.transform);
             anim.SetBool("isAttacking", false);
             anim.SetBool("isBuffing", false);
         }
@@ -90,5 +100,28 @@ public class BronyaScript : MonoBehaviour
             currentMaxHealth = baseHealth;
             yield return null;
         }
+    }
+    // Deals damage to the player after the attack animation when the player is within range
+    private IEnumerator CheckIfInRange()
+    {
+        distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
+        if (distanceToPlayer < 1.5f)
+        {
+            isAttacking = true;
+            yield return new WaitForSeconds(attackSpeed);
+            player.GetComponent<PlayerScript>().currentHealth -= currentMaxDamage;
+            Debug.Log("Hit player for " + currentMaxDamage + " damage");
+            isAttacking = false;
+        }
+        else
+        {
+            yield return null;
+        }
+    }
+
+    // Fix the rotation from the lookAt method since sometimes it goes upside down and goes through the floor
+    private void LateUpdate()
+    {
+        transform.parent.rotation = Quaternion.Euler(0, transform.parent.eulerAngles.y, 0);
     }
 }
