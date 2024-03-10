@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject enemyLogicEngine;
     private float maxHealth = 1000;
     public float currentHealth;
     private float currentAttack = 10;
     void Start()
     {
         currentHealth = maxHealth;
+        enemyLogicEngine = GameObject.Find("EnemyLogicEngine");
     }
 
     // Update is called once per frame
@@ -22,7 +24,15 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("Current health: " + currentHealth);
+            // Debug.Log("Current health: " + currentHealth);
+        }
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().KillAllEnemies();
+            Debug.Log("Key K pressed");
         }
     }
+
+    // Kill of the enemies (For testing purposes)
 }

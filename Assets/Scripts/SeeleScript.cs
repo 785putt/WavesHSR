@@ -13,11 +13,12 @@ public class SeeleScript : MonoBehaviour
     private int baseHealth = 100;
     private float attackSpeed = 2.6f;
     private bool isAttacking = false;
+    private bool isDead = false;
     [SerializeField] private int buffedDamage;
     [SerializeField] private int buffedHealth;
     [SerializeField] private int currentMaxHealth;
     [SerializeField] private int currentMaxDamage;
-    private int currentHealth;
+    public int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,31 +29,44 @@ public class SeeleScript : MonoBehaviour
         currentMaxDamage = baseDamage;
         buffedDamage = baseDamage * 2;
         buffedHealth = baseHealth * 2;
+        currentHealth = currentMaxHealth;
+        anim.SetBool("isDead", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
-        // Coroutine to check the buffed state
-        StartCoroutine(CheckBuffedState());
-        if (distanceToPlayer < 1.5f)
+        // Check if this enemy is dead
+        // Debug.Log("Current health: " + currentHealth);
+        if (currentHealth > 0)
         {
-            anim.SetBool("isAttacking", true);
-            // To make sure that the coroutine is not running multiple times
-            if (isAttacking == false)
+            distanceToPlayer = GetComponentInParent<EnemyProximityCheckerScript>().distanceToPlayer;
+            // Coroutine to check the buffed state
+            StartCoroutine(CheckBuffedState());
+            if (distanceToPlayer < 1.5f)
             {
-                StartCoroutine(CheckIfInRange());
+                anim.SetBool("isAttacking", true);
+                // To make sure that the coroutine is not running multiple times
+                if (isAttacking == false)
+                {
+                    StartCoroutine(CheckIfInRange());
+                }
             }
+            else
+            {
+                // Look at the player
+                transform.parent.LookAt(player.transform);
+                anim.SetBool("isAttacking", false);
+            }
+            // Debug.Log("Current damage: " + currentMaxDamage);
+            // Debug.Log("Current health: " + currentMaxHealth);
         }
-        else
+        else if (isDead == false && currentHealth <= 0)
         {
-            // Look at the player
-            transform.parent.LookAt(player.transform);
-            anim.SetBool("isAttacking", false);
+            isDead = true;
+            anim.SetBool("isDead", true);
+            Debug.Log("Seele is dead");
         }
-        // Debug.Log("Current damage: " + currentMaxDamage);
-        // Debug.Log("Current health: " + currentMaxHealth);
     }
     private IEnumerator CheckBuffedState()
     {
@@ -86,7 +100,7 @@ public class SeeleScript : MonoBehaviour
             isAttacking = true;
             yield return new WaitForSeconds(attackSpeed);
             player.GetComponent<PlayerScript>().currentHealth -= currentMaxDamage;
-            Debug.Log("Hit player for " + currentMaxDamage + " damage");
+            // Debug.Log("Hit player for " + currentMaxDamage + " damage");
             isAttacking = false;
         }
         else
@@ -94,21 +108,6 @@ public class SeeleScript : MonoBehaviour
             yield return null;
         }
     }
-    // // Deals damage to the player if they are inside the trigger with the attack speed delay
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.tag == "Player")
-    //     {
-    //         other.gameObject.GetComponent<PlayerScript>().currentHealth -= currentMaxDamage;
-    //         Debug.Log("Hit player for " + currentMaxDamage + " damage");
-    //         StartCoroutine(AttackSpeedDelay());
-    //     }
-    // }
-    // // Coroutine to delay the attack speed
-    // private IEnumerator AttackSpeedDelay()
-    // {
-    //     yield return new WaitForSeconds(attackSpeed);
-    // }
     // Fix the rotation from the lookAt method since sometimes it goes upside down and goes through the floor
     private void LateUpdate()
     {

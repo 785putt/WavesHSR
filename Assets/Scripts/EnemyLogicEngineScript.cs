@@ -10,7 +10,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
     private int enemyPerLevel = 10;
     private int eliteEnemyPerLevel = 1;
     private int currentLevel;
-    private List<GameObject> enemies;
+    public List<GameObject> enemies;
     public GameObject seele;
     public GameObject bronya;
     // Start is called before the first frame update
@@ -58,5 +58,25 @@ public class EnemyLogicEngineScript : MonoBehaviour
         {
             StartCoroutine(SpawnEnemies());
         }
+    }
+
+    // Function to kill all the enemies for testing purposes
+    public void KillAllEnemies()
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            // Debug.Log("Enemy name: " + enemy.name);
+            if (enemy.name.Contains("Seele")){
+                Debug.Log("Seele HP: " + enemy.GetComponentInChildren<SeeleScript>().currentHealth);
+                enemy.GetComponentInChildren<SeeleScript>().currentHealth = 0;
+            }
+            else if (enemy.name.Contains("Bronya"))
+            {
+                Debug.Log("Bronya HP: " + enemy.GetComponentInChildren<BronyaScript>().currentHealth);
+                enemy.GetComponentInChildren<BronyaScript>().currentHealth = 0;
+            }
+            // Destroy(enemy);
+        }
+        // enemies.Clear();
     }
 }
