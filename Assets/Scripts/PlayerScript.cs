@@ -11,10 +11,14 @@ public class PlayerScript : MonoBehaviour
     public float currentHealth;
     private float currentAttack = 10;
     public TextMeshPro hptext;
+    public GameObject hptxt;
     void Start()
     {
         currentHealth = maxHealth;
         enemyLogicEngine = GameObject.Find("EnemyLogicEngine");
+        hptxt = GameObject.Find("hptext");
+
+        hptext = hptxt.GetComponent<TextMeshPro>();
     }
 
     // Update is called once per frame

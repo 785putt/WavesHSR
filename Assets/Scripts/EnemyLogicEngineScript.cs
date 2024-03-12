@@ -19,6 +19,8 @@ public class EnemyLogicEngineScript : MonoBehaviour
     public int score;
     public TextMeshPro leveltext;
     public TextMeshPro scoretext;
+    public GameObject scoretxt;
+    public GameObject leveltxt;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,11 @@ public class EnemyLogicEngineScript : MonoBehaviour
         currentLevel = 1;
         // StartCoroutine(SpawnEnemies());
         enemies = new List<GameObject>();
+        scoretxt = GameObject.Find("scoretext");
+        leveltxt = GameObject.Find("level");
+
+        scoretext = scoretxt.GetComponent<TextMeshPro>();
+        leveltext = leveltxt.GetComponent<TextMeshPro>();
     }
 
     // Update is called once per frame
@@ -96,7 +103,8 @@ public class EnemyLogicEngineScript : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             // Debug.Log("Enemy name: " + enemy.name);
-            if (enemy.name.Contains("Seele")){
+            if (enemy.name.Contains("Seele"))
+            {
                 Debug.Log("Seele HP: " + enemy.GetComponentInChildren<SeeleScript>().currentHealth);
                 enemy.GetComponentInChildren<SeeleScript>().currentHealth = 0;
             }
