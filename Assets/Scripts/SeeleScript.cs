@@ -9,16 +9,16 @@ public class SeeleScript : MonoBehaviour
     private float distanceToPlayer;
     public Animator anim;
     public GameObject enemyLogicEngine;
-    private int baseDamage = 10;
-    private int baseHealth = 100;
+    private float baseDamage = 10;
+    private float baseHealth = 100;
     private float attackSpeed = 2.6f;
     private bool isAttacking = false;
     private bool isDead = false;
-    [SerializeField] private int buffedDamage;
-    [SerializeField] private int buffedHealth;
-    [SerializeField] private int currentMaxHealth;
-    [SerializeField] private int currentMaxDamage;
-    public int currentHealth;
+    [SerializeField] private float buffedDamage;
+    [SerializeField] private float buffedHealth;
+    [SerializeField] private float currentMaxHealth;
+    [SerializeField] private float currentMaxDamage;
+    public float currentHealth;
     // Start is called before the first frame update
     void Start()
     {
