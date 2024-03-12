@@ -17,9 +17,15 @@ public class PlayerScript : MonoBehaviour
         currentHealth = maxHealth;
         enemyLogicEngine = GameObject.Find("EnemyLogicEngine");
         hptxt = GameObject.Find("hptext");
-
         hptext = hptxt.GetComponent<TextMeshPro>();
     }
+
+    public void HandleButtonClick()
+    {
+        Debug.Log("Button is clicked");
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -41,6 +47,7 @@ public class PlayerScript : MonoBehaviour
             enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().KillAllEnemies();
             Debug.Log("Key K pressed");
         }
+
 
     }
 
