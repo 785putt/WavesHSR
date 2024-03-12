@@ -9,16 +9,16 @@ public class BronyaScript : MonoBehaviour
     public Animator anim;
     public GameObject enemyLogicEngine;
     public GameObject[] enemies;
-    [SerializeField] private int baseDamage = 20;
-    [SerializeField] private int baseHealth = 150;
-    [SerializeField] private int buffedDamage;
-    [SerializeField] private int buffedHealth;
+    [SerializeField] private float baseDamage = 20;
+    [SerializeField] private float baseHealth = 150;
+    [SerializeField] private float buffedDamage;
+    [SerializeField] private float buffedHealth;
     private float attackSpeed = 3.4f;
     private bool isAttacking = false;
     private bool isDead = false;
-    private int currentMaxHealth;
-    private int currentMaxDamage;
-    public int currentHealth;
+    private float currentMaxHealth;
+    private float currentMaxDamage;
+    public float currentHealth;
     // Start is called before the first frame update
     void Start()
     {

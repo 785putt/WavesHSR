@@ -27,12 +27,13 @@ public class PlayerScript : MonoBehaviour
             // Debug.Log("Current health: " + currentHealth);
         }
 
+        // Testing code to kill all enemies to check the animation
         if (Input.GetKey(KeyCode.K))
         {
             enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().KillAllEnemies();
             Debug.Log("Key K pressed");
         }
+
     }
 
-    // Kill of the enemies (For testing purposes)
 }
