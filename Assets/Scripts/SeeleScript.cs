@@ -65,7 +65,8 @@ public class SeeleScript : MonoBehaviour
         {
             isDead = true;
             anim.SetBool("isDead", true);
-            Debug.Log("Seele is dead");
+            // Debug.Log("Seele is dead");
+            enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().score += 1;
             StartCoroutine(SetInactive());
         }
     }

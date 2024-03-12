@@ -88,7 +88,8 @@ public class BronyaScript : MonoBehaviour
         {
             isDead = true;
             anim.SetBool("isDead", true);
-            Debug.Log("Bronya is dead");
+            // Debug.Log("Bronya is dead");
+            enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().score += 2;
             StartCoroutine(SetInactive());
         }
     }

@@ -8,13 +8,14 @@ public class EnemyLogicEngineScript : MonoBehaviour
 {
     public EnemyAttackState attackState;
     public EnemyHealthState healthState;
-    private int enemyPerLevel = 10;
+    private int enemyPerLevel = 3;
     private int eliteEnemyPerLevel = 1;
     private int currentLevel;
     private int currentActiveEnemies;
     public List<GameObject> enemies;
     public GameObject seele;
     public GameObject bronya;
+    public int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
     {
         // Check if all enemies are defeated
         StartCoroutine(CheckEnemiesStatus());
+        Debug.Log("Score: " + score);
         // Debug.Log("Attack state: " + attackState);
         // Debug.Log("Health state: " + healthState);
     }
