@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     private float maxHealth = 1000;
     public float currentHealth;
     private float currentAttack = 10;
+    public TextMeshPro hptext;
     void Start()
     {
         currentHealth = maxHealth;
@@ -21,9 +23,11 @@ public class PlayerScript : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player is dead");
+            hptext.text = "RIP BOZO";
         }
         else
         {
+            hptext.text = "HP " + currentHealth.ToString();
             // Debug.Log("Current health: " + currentHealth);
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class EnemyLogicEngineScript : MonoBehaviour
     public GameObject seele;
     public GameObject bronya;
     public int score;
+    public TextMeshPro leveltext;
+    public TextMeshPro scoretext;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,8 @@ public class EnemyLogicEngineScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        leveltext.text = "LEVEL " + currentLevel.ToString();
+        scoretext.text = "KILLZ " + score.ToString();
         // Check if all enemies are defeated
         StartCoroutine(CheckEnemiesStatus());
         Debug.Log("Current Active Enemies: " + enemies.Count);
