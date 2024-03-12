@@ -13,11 +13,14 @@ public class pewpew : MonoBehaviour
     [SerializeField] float cooldown = 1;
     public float speed = 10f;
     public TextMeshPro reload;
-    public AudioSource shotsound;
-    public AudioSource ping;
+    public AudioSource audioSource;
+    public AudioClip shot;
+    public AudioClip ping;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        reload = GameObject.Find("bullettext").GetComponent<TextMeshPro>();
         reload.text = "";
     }
 
@@ -57,10 +60,12 @@ public class pewpew : MonoBehaviour
                 thebullet.GetComponent<Rigidbody>().velocity = speed * barrel.transform.forward;
                 Destroy(thebullet, 5);
                 cooldown = 0;
-                shotsound.Play();
+                audioSource.clip = shot;
+                audioSource.Play();
                 if (shotsfired == 7)
                 {
-                    ping.Play();
+                    audioSource.clip = ping;
+                    audioSource.Play();
                 }
                 shotsfired++;
             }
