@@ -8,13 +8,14 @@ public class EnemyLogicEngineScript : MonoBehaviour
 {
     public EnemyAttackState attackState;
     public EnemyHealthState healthState;
-    private int enemyPerLevel = 10;
+    private int enemyPerLevel = 3;
     private int eliteEnemyPerLevel = 1;
     private int currentLevel;
     private int currentActiveEnemies;
     public List<GameObject> enemies;
     public GameObject seele;
     public GameObject bronya;
+    public int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,16 +31,18 @@ public class EnemyLogicEngineScript : MonoBehaviour
     {
         // Check if all enemies are defeated
         StartCoroutine(CheckEnemiesStatus());
+        Debug.Log("Score: " + score);
         // Debug.Log("Attack state: " + attackState);
         // Debug.Log("Health state: " + healthState);
     }
     // Coroutine to activate the old enemies (object pooling) before adding new enemies for the next level
-    private IEnumerator ActivateOldEnemies()
+    private IEnumerator ActivateEnemies()
     {
-        yield return new WaitForSeconds(1);
+        // yield return new WaitForSeconds(1);
         foreach (GameObject enemy in enemies)
         {
             enemy.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     // Coroutine to spawn enemies
@@ -76,7 +79,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
         if (currentActiveEnemies == 0)
         {
             // Debug.Log("All enemies are defeated");
-            StartCoroutine(ActivateOldEnemies());
+            StartCoroutine(ActivateEnemies());
             StartCoroutine(SpawnEnemies());
         }
         currentActiveEnemies = 0;

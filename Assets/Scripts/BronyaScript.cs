@@ -19,6 +19,7 @@ public class BronyaScript : MonoBehaviour
     private float currentMaxHealth;
     private float currentMaxDamage;
     public float currentHealth;
+    public AudioClip spawnSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +89,8 @@ public class BronyaScript : MonoBehaviour
         {
             isDead = true;
             anim.SetBool("isDead", true);
-            Debug.Log("Bronya is dead");
+            // Debug.Log("Bronya is dead");
+            enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().score += 2;
             StartCoroutine(SetInactive());
         }
     }
@@ -99,6 +101,8 @@ public class BronyaScript : MonoBehaviour
         anim.SetBool("isDead", false);
         transform.parent.position = new Vector3(Random.Range(-10, 10), 0.125f, Random.Range(-10, 10));
         transform.parent.LookAt(player.transform);
+        GetComponentInParent<AudioSource>().clip = spawnSound;
+        GetComponentInParent<AudioSource>().Play();
     }
     private IEnumerator CheckBuffedState()
     {
@@ -150,5 +154,14 @@ public class BronyaScript : MonoBehaviour
     private void LateUpdate()
     {
         transform.parent.rotation = Quaternion.Euler(0, transform.parent.eulerAngles.y, 0);
+    }
+    // Check if a bullet hits this game object
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bullets")
+        {
+            currentHealth -= 50;
+            // Debug.Log("Hit by bullet");
+        }
     }
 }

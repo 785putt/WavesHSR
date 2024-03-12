@@ -17,4 +17,5 @@ public class EnemyProximityCheckerScript : MonoBehaviour
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
     }
+
 }
