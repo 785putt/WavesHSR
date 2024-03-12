@@ -36,12 +36,13 @@ public class EnemyLogicEngineScript : MonoBehaviour
         // Debug.Log("Health state: " + healthState);
     }
     // Coroutine to activate the old enemies (object pooling) before adding new enemies for the next level
-    private IEnumerator ActivateOldEnemies()
+    private IEnumerator ActivateEnemies()
     {
-        yield return new WaitForSeconds(1);
+        // yield return new WaitForSeconds(1);
         foreach (GameObject enemy in enemies)
         {
             enemy.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
         }
     }
     // Coroutine to spawn enemies
@@ -78,7 +79,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
         if (currentActiveEnemies == 0)
         {
             // Debug.Log("All enemies are defeated");
-            StartCoroutine(ActivateOldEnemies());
+            StartCoroutine(ActivateEnemies());
             StartCoroutine(SpawnEnemies());
         }
         currentActiveEnemies = 0;
