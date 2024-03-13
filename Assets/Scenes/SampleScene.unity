@@ -7202,10 +7202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d896879beae124d8567ff4a81e6055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScript: {fileID: 2078025061}
+  player: {fileID: 0}
   playerTransform: {fileID: 0}
   detectionRadius: 1
   uiButtonInstance: {fileID: 0}
+  enemyLogicEngine: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &2067738207
 GameObject:
   m_ObjectHideFlags: 0
@@ -7375,17 +7377,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070023008}
   m_Mesh: {fileID: 6637600903843369997, guid: 855f216b5062d2c4da4f9ff6ea24029c, type: 3}
---- !u!114 &2078025061 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6320626702628170693, guid: 2d7cd8a42621d2f409ed268b8003fc9c, type: 3}
-  m_PrefabInstance: {fileID: 72162726}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c65bf12d05549a409b5cd5bce844caa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2078025068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6240158600216700367, guid: 2d7cd8a42621d2f409ed268b8003fc9c, type: 3}

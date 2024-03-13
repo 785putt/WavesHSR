@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     private float currentAttack = 10;
     public TextMeshPro hptext;
     public GameObject hptxt;
+    public GameObject confirmWindow;
     void Start()
     {
         currentHealth = maxHealth;
@@ -42,12 +44,11 @@ public class PlayerScript : MonoBehaviour
         }
 
         // Testing code to kill all enemies to check the animation
-        if (Input.GetKey(KeyCode.K))
-        {
-            enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().KillAllEnemies();
-            Debug.Log("Key K pressed");
-        }
-
+        // if (Input.GetKey(KeyCode.K))
+        // {
+        //     enemyLogicEngine.GetComponent<EnemyLogicEngineScript>().KillAllEnemies();
+        //     Debug.Log("Key K pressed");
+        // }
 
     }
 

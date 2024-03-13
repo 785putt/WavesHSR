@@ -21,6 +21,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
     public TextMeshPro scoretext;
     public GameObject scoretxt;
     public GameObject leveltxt;
+    public bool startSpawning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +31,19 @@ public class EnemyLogicEngineScript : MonoBehaviour
         // StartCoroutine(SpawnEnemies());
         enemies = new List<GameObject>();
         scoretxt = GameObject.Find("scoretext");
-        leveltxt = GameObject.Find("level");
+        leveltxt = GameObject.Find("leveltext");
 
         scoretext = scoretxt.GetComponent<TextMeshPro>();
         leveltext = leveltxt.GetComponent<TextMeshPro>();
     }
+
+    // void OnEnable()
+    // {
+    //     scoretxt = GameObject.Find("scoretext");
+    //     leveltxt = GameObject.Find("level");
+    //     scoretxt.SetActive(true);
+    //     leveltxt.SetActive(true);
+    // }
 
     // Update is called once per frame
     void Update()
@@ -42,8 +51,12 @@ public class EnemyLogicEngineScript : MonoBehaviour
         leveltext.text = "LEVEL " + currentLevel.ToString();
         scoretext.text = "KILLZ " + score.ToString();
         // Check if all enemies are defeated
-        StartCoroutine(CheckEnemiesStatus());
-        Debug.Log("Current Active Enemies: " + enemies.Count);
+        if (startSpawning == true)
+        {
+            StartCoroutine(CheckEnemiesStatus());
+        }
+        // Debug.Log("Current Active Enemies: " + enemies.Count);
+        Debug.Log("Spawn state: " + startSpawning);
         // Debug.Log("Attack state: " + attackState);
         // Debug.Log("Health state: " + healthState);
     }
