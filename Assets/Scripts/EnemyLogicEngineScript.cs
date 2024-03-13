@@ -31,7 +31,7 @@ public class EnemyLogicEngineScript : MonoBehaviour
         // StartCoroutine(SpawnEnemies());
         enemies = new List<GameObject>();
         scoretxt = GameObject.Find("scoretext");
-        leveltxt = GameObject.Find("leveltext");
+        leveltxt = GameObject.Find("level");
 
         scoretext = scoretxt.GetComponent<TextMeshPro>();
         leveltext = leveltxt.GetComponent<TextMeshPro>();

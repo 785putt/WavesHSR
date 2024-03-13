@@ -42,11 +42,14 @@ public class pewpew : MonoBehaviour
             reload.text = "RELOADING ...";
             cooldown += Time.deltaTime;
         }
-
         if (cooldown >= 3)
         {
             shotsfired = 0;
         }
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     pew();
+        // }
 
     }
 
